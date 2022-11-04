@@ -29,10 +29,10 @@ export const agregarUsuario = async (req: Request, res: Response) =>{
             apellido_materno,
             correo
         } = req.body;
-        console.log(req.body);
-        return;
-
-        /* onst usua = await Usuario.create(); */
+        
+        res.status(200).json({
+            data: req.body
+        })
     } catch (error) {
         
     }
