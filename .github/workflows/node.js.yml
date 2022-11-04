@@ -40,6 +40,9 @@ jobs:
        HOST: ${{env.HOST}}
        USER: ${{env.USER}}
        PRIVATE_SSH_KEY: ${{ secrets.PASSWORD }}
-       COMMAND:  ls
+       COMMAND:  cd backend; 
+                 pm2 stop run;
+                 pm2 del run;
+                 pm2 start run
     
 
