@@ -29,10 +29,28 @@ export const agregarUsuario = async (req: Request, res: Response) =>{
             apellido_materno,
             correo
         } = req.body;
-        
-        res.status(200).json({
-            data: req.body
-        })
+        if(rut && nombre && apellido_materno && apellido_paterno && correo){
+            const obj = await Usuario.create({
+                rut:rut,
+                nombre:nombre,
+                apellido_paterno:apellido_paterno,
+                apellido_materno:apellido_materno,
+                correo:correo
+            })
+            res.status(200).json({
+                method: "POST",
+                message: 'El usuario se creo con exito',
+                data:obj
+            })
+
+        }else {
+            res.status(200).json({
+                message: "Los parametro del cuerpo no pueden estar vacios",
+                method :"POST",
+                data : req.body    
+            })
+        }
+
     } catch (error) {
         
     }
