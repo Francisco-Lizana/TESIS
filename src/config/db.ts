@@ -19,7 +19,6 @@ export const conection = new Sequelize({
       Usuario,
       Estacion,
       Sensor
-      
     ],
     logging:true
   });
