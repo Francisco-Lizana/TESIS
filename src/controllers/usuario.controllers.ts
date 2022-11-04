@@ -27,6 +27,7 @@ export const agregarUsuario = async (req: Request, res: Response) =>{
             nombre,
             apellido_paterno,
             apellido_materno,
+            rol,
             correo
         } = req.body;
         if(rut && nombre && apellido_materno && apellido_paterno && correo){
@@ -44,7 +45,7 @@ export const agregarUsuario = async (req: Request, res: Response) =>{
             })
 
         }else {
-            res.status(200).json({
+            res.status(400).json({
                 message: "Los parametro del cuerpo no pueden estar vacios",
                 method :"POST",
                 data : req.body    
