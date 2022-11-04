@@ -43,6 +43,6 @@ jobs:
        COMMAND:  cd backend; 
                  pm2 stop run;
                  pm2 del run;
-                 pm2 start run
+                 pm2 start run.sh
     
 
