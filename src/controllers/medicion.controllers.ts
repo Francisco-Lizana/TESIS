@@ -5,7 +5,8 @@ import { Sensor } from "../models/Sensor";
 
 export const agregarMedicioDeEstacion = async(req:Request, res: Response) =>{
     try{
-        const {valor,fecha,id_estacion,id_sensor} = req.body;
+        var {valor,fecha,id_estacion,id_sensor} = req.body;
+        fecha = new Date();
         console.log("Body",req.body)
         if(id_estacion && valor && fecha && id_sensor){
 
