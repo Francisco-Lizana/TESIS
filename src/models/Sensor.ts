@@ -1,5 +1,6 @@
 import {Table,Model,Column,DataType, HasMany, ForeignKey, BelongsTo} from 'sequelize-typescript';
 import { Estacion } from './Estacion';
+import { Medicion } from './Medicion';
 
 
 @Table({
@@ -30,16 +31,25 @@ export class Sensor extends Model {
 
     
     @Column({
-        type: DataType.STRING,
+        type: DataType.JSON,
         allowNull:false,
     })
-    configuracion!:string;
+    configuracion!:JSON;
 
     /* Clavez Foraneas*/
 
     @ForeignKey(()=>Estacion)
     id_estacion!:number;
 
+    @ForeignKey(()=>Medicion)
+    id_medicion!:number[];
+
+    /*Relaciones*/
+
     @BelongsTo(()=>Estacion)
     estacion!:Estacion;
+
+    @HasMany(()=>Medicion)
+    mediciones!: Medicion[];
+
 }

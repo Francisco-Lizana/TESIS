@@ -38,6 +38,12 @@ export class Medicion extends Model {
 
 
     /*Relaciones */
+    @BelongsTo(()=>Estacion)
+    estacion!:Estacion;
+
+    @BelongsTo(()=>Sensor)
+    sensor!:Sensor;
+
 
     
 }

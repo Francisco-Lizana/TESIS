@@ -4,7 +4,7 @@ import { Estacion} from '../models/Estacion';
 export const obtenerEstaciones =async (req:Request, res: Response) => {
     try {
         const list = await Estacion.findAll();
-
+        
         if(list.length){
             res.status(200).json({
                 message:"Lista de estaciones",
