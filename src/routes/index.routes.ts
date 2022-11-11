@@ -12,6 +12,6 @@ routes.use("/api",rol);
 routes.use("/api",estacion);
 
 /*TEST PARA LA PRUEBA DE HARDWARE*/
-routes.post("api/test", postTest);
+routes.post("/api/test", postTest);
 
 export default routes;
