@@ -40,5 +40,4 @@ export class Usuario extends Model {
     correo!:string;
 
 
-
 }

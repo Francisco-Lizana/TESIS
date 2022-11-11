@@ -1,5 +1,8 @@
 import { Request, Response } from "express";
 import { Medicion} from '../models/Medicion';
+import { Estacion } from "../models/Estacion";
+import { Sensor } from "../models/Sensor";
+
 export const agregarMedicioDeEstacion = async(req:Request, res: Response) =>{
     try{
         const {valor,fecha,id_estacion,id_sensor} = req.body;
@@ -61,7 +64,7 @@ export const obtenerMedicionesDeEstacion =  async (req:Request, res: Response) =
 }
 export const obtenerListaDeMediciones = async (req:Request, res:Response)=> {
     try {
-        const list = await Medicion.findAll();
+        const list = await Medicion.findAll( {include:[Estacion, Sensor]});
         res.status(200).json({
             message: "Lista de mediciones de estaciones",
             method:"GET",
