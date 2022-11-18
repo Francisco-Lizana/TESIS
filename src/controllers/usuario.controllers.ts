@@ -7,6 +7,7 @@ export const getUsuarios = async (req: Request, res: Response) => {
 
     try {
         const usuarios = await Usuario.findAll({include : [Rol]});
+
         res.status(200).json({
             message:'Listado de Usuarios',
             method: "GET",
@@ -31,7 +32,6 @@ export const agregarUsuario = async (req: Request, res: Response) =>{
             apellido_paterno,
             apellido_materno,
             correo,
-            clave, 
             id_rol
         } = req.body;
 
@@ -45,7 +45,7 @@ export const agregarUsuario = async (req: Request, res: Response) =>{
                 apellido_paterno:apellido_paterno,
                 apellido_materno:apellido_materno,
                 correo:correo,
-                clave:clave
+                clave:"12345678"
             })
                        
             await user.$add("roles", rol!);
