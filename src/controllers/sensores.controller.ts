@@ -49,3 +49,30 @@ export const agregarSensor = async (req:Request, res:Response) =>{
         })
     }
 }
+
+export const eliminarSensor = async (req:Request, res:Response) =>{
+    try{
+        const {id_sensor} = req.params;
+
+        if(id_sensor){
+            const obj = await Sensor.findByPk(id_sensor);
+            obj?.destroy()
+            res.status(200).json({
+                message: "El sensor se a eliminado exitosamente",
+                method:"DELETE",
+            })
+        }else{
+            res.status(400).json({
+                message: "El parametro id_estacion no puede estar vacio",
+                method: "DELETE"
+            })
+        }
+    }catch(error){
+        res.status(500).json({
+            message:"Error al eliminar el sensor",
+            method: "DELETE",
+            error:error
+        })
+    }
+
+}
