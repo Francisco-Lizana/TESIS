@@ -35,6 +35,7 @@ export const agregarUsuario = async (req: Request, res: Response) =>{
             id_rol
         } = req.body;
 
+        
         const t = await connection.transaction();
         if(rut && nombre && apellido_materno && apellido_paterno && correo){
             const rol = await Rol.findByPk(id_rol);
