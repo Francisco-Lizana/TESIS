@@ -12,7 +12,7 @@ export const obtenerEstaciones =async (req:Request, res: Response) => {
                 data: list
             })
         }else{
-            res.status(400).json({
+            res.status(200).json({
                 message: "No hay estaciones Registradas",
                 method: "GET"
     
