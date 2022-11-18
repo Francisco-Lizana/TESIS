@@ -42,7 +42,7 @@ export class Sensor extends Model {
     
     @Column({
         type: DataType.JSON,
-        allowNull:false,
+        allowNull:true,
     })
     configuracion!:JSON;
 
@@ -51,8 +51,6 @@ export class Sensor extends Model {
     @ForeignKey(()=>Estacion)
     id_estacion!:number;
 
-    @ForeignKey(()=>Medicion)
-    id_medicion!:number[];
 
     /*Relaciones*/
 
