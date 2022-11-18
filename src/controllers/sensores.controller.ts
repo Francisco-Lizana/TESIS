@@ -4,7 +4,7 @@ import { Sensor } from "../models/Sensor";
 
 export const Obtenersensores = async (req: Request, res: Response) => {
     try {
-        const sensores = await Sensor.findAll({include:[Estacion]});
+        const sensores = await Estacion.findAll({include:[Sensor]});
         res.status(200).json({
             message:'Listado de Sensores',
             method: "GET",
