@@ -68,7 +68,14 @@ export const agregarEstacion = async (req:Request, res: Response) =>{
     try {
         const {nombre, ubicacion} =req.body;
         if(nombre && ubicacion){
-            
+            const obj = await Estacion.create({
+                nombre,
+                ubicacion,
+
+            });
+            res.status(200).json({
+                
+            })
         }else{
             res.status(400).json({
                 message:"No se puede crear la estación",
