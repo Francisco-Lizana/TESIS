@@ -71,10 +71,11 @@ export const agregarEstacion = async (req:Request, res: Response) =>{
             const obj = await Estacion.create({
                 nombre,
                 ubicacion,
-
             });
             res.status(200).json({
-
+                message:"Estación agregada con exito",
+                method:"POST",
+                data: obj
             })
         }else{
             res.status(400).json({

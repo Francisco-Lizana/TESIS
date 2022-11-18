@@ -5,7 +5,7 @@ const router =  Router();
 
 router.get("/estacion/lista", obtenerEstaciones);
 router.post("/estacion", agregarEstacion);
-router.delete("/estacion/:id", eliminarEstacion);
+router.delete("/estacion/:id_estacion", eliminarEstacion);
 router.get("/estacion/:id");
 export default router;
 
