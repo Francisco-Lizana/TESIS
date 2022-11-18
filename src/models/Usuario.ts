@@ -1,4 +1,7 @@
-import {Table,Model,Column,DataType, HasMany, ForeignKey, BelongsTo} from 'sequelize-typescript';
+import {Table,Model,Column,DataType, BelongsToMany,ForeignKey} from 'sequelize-typescript';
+import { Rol } from './Rol';
+import { RolUsuario } from './RolUsuario';
+import * as bcrypt from "bcrypt";
 
 
 @Table({
@@ -38,6 +41,19 @@ export class Usuario extends Model {
         allowNull:false,
     })
     correo!:string;
+    @Column({
+        type: DataType.STRING,
+        allowNull:false,
+        unique:true,
+        set(value: any) {
+            const hash = bcrypt.hashSync(value, 8);
+            this.setDataValue('clave', hash);
+        }
+    })
+    clave!:string;
+
+    @BelongsToMany(() => Rol, () => RolUsuario)
+    roles!: Rol[];
 
 
 }

@@ -1,49 +1,54 @@
 import {Table,Model,Column,DataType, HasMany, ForeignKey, BelongsTo} from 'sequelize-typescript';
 import { Estacion } from './Estacion';
-import { Sensor } from './Sensor';
 
 @Table({
     timestamps:false,
-    tableName:'medicion'
+    tableName:'actuador'
 })
-export class Medicion extends Model {
 
+export class Actuador extends Model {
     @Column({
         type: DataType.INTEGER,
         primaryKey:true,
         allowNull:false,
         autoIncrement:true
     })
-    id_medicion!:number;
+    id_actuador!:number;
 
+    
     @Column({
-        type: DataType.INTEGER,
+        type: DataType.STRING,
         allowNull:false,
     })
-    valor!:number;
+    descripcion!:string;
 
     @Column({
-        type: DataType.DATE,
+        type: DataType.STRING,
         allowNull:false,
     })
-    fecha!:Date;
+    tipo!:string;
+    
+    @Column({
+        type: DataType.STRING,
+        allowNull:false,
+    })
+    modelo!:string;
 
-    /*Claves Foraneas*/
+    @Column({
+        type: DataType.JSON,
+        allowNull:false,
+    })
+    configuracion!:JSON;
 
-    @ForeignKey(()=> Estacion)
+    /* Clavez Foraneas*/
+
+    @ForeignKey(()=>Estacion)
     id_estacion!:number;
 
-    @ForeignKey(()=> Sensor)
-    id_sensor!:number;
+    /*Relaciones*/
 
-
-    /*Relaciones */
     @BelongsTo(()=>Estacion)
     estacion!:Estacion;
 
-    @BelongsTo(()=>Sensor)
-    sensor!:Sensor;
 
-
-    
 }

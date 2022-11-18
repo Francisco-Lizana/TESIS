@@ -1,4 +1,6 @@
-import {Table,Model,Column,DataType, HasMany, ForeignKey, BelongsTo} from 'sequelize-typescript';
+import {Table,Model,Column,DataType, HasMany, ForeignKey, BelongsToMany} from 'sequelize-typescript';
+import { RolUsuario } from './RolUsuario';
+import { Usuario } from './Usuario';
 
 @Table({
     timestamps:false,
@@ -13,11 +15,14 @@ export class Rol extends Model {
         allowNull:false,
         autoIncrement:true
     })
-    id!:number;
+    id_rol!:number;
 
     @Column({
         type: DataType.STRING,
         allowNull:false,
     })
     valor!:string;
+
+    @BelongsToMany(() => Usuario, () => RolUsuario)
+    usuarios!: Usuario[];
 }

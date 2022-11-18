@@ -1,10 +1,12 @@
 import { Request, Response } from "express";
+import { Rol } from "../models/Rol";
 import { Usuario} from '../models/Usuario';
+import { conection as connection } from '../config/db';
 
 export const getUsuarios = async (req: Request, res: Response) => {
 
     try {
-        const usuarios = await Usuario.findAll();
+        const usuarios = await Usuario.findAll({include : [Rol]});
         res.status(200).json({
             message:'Listado de Usuarios',
             method: "GET",
@@ -22,26 +24,36 @@ export const getUsuarios = async (req: Request, res: Response) => {
 }
 export const agregarUsuario = async (req: Request, res: Response) =>{
     try {
+        console.log(req.body);
         const  {
             rut,
             nombre,
             apellido_paterno,
             apellido_materno,
-            rol,
-            correo
+            correo,
+            clave, 
+            id_rol
         } = req.body;
+
+        const t = await connection.transaction();
         if(rut && nombre && apellido_materno && apellido_paterno && correo){
-            const obj = await Usuario.create({
+            const rol = await Rol.findByPk(id_rol);
+            console.log("ROL",rol)
+            const user= await Usuario.create({
                 rut:rut,
                 nombre:nombre,
                 apellido_paterno:apellido_paterno,
                 apellido_materno:apellido_materno,
-                correo:correo
+                correo:correo,
+                clave:clave
             })
+                       
+            await user.$add("roles", rol!);
+            let roles = await user.$get("roles");
             res.status(200).json({
                 method: "POST",
                 message: 'El usuario se creo con exito',
-                data:obj
+                data:user
             })
 
         }else {

@@ -1,5 +1,5 @@
 import * as bcrypt from "bcrypt";
 
-export default function checkIfUnencryptedPasswordIsValid(value: string,password:string) {
+export default function valid(value: string,password:string) {
     return bcrypt.compareSync(value, password);
   }

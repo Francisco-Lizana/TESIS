@@ -14,7 +14,7 @@ export class Sensor extends Model {
         allowNull:false,
         autoIncrement:true
     })
-    id!:number;
+    id_sensor!:number;
 
     
     @Column({
@@ -22,6 +22,16 @@ export class Sensor extends Model {
         allowNull:false,
     })
     descripcion!:string;
+    @Column({
+        type: DataType.STRING,
+        allowNull:false,
+    })
+    tipo!:string;
+    @Column({
+        type: DataType.STRING,
+        allowNull:false,
+    })
+    modelo!:string;
 
     @Column({
         type: DataType.STRING,

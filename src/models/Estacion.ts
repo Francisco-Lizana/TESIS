@@ -1,6 +1,10 @@
-import {Table,Model,Column,DataType, HasMany, ForeignKey, BelongsTo} from 'sequelize-typescript';
+import {Table,Model,Column,DataType, HasMany, ForeignKey, BelongsTo, BelongsToMany} from 'sequelize-typescript';
+import { Actuador } from './Actuador';
 import { Medicion } from './Medicion';
+import { Plan } from './Plan';
 import { Sensor } from './Sensor';
+import { Trabaja } from './Trabaja';
+import { Trabajador } from './Trabajador';
 @Table({
     timestamps:false,
     tableName:'estacion'
@@ -12,7 +16,7 @@ export class Estacion extends Model {
         allowNull:false,
         autoIncrement:true
     })
-    id!:number;
+    id_estacion!:number;
 
     @Column({
         type: DataType.STRING,
@@ -32,5 +36,15 @@ export class Estacion extends Model {
 
     @HasMany(()=>Sensor)
     sensores!: Sensor[];
+
+    @HasMany(()=>Actuador)
+    actuadores!: Actuador[];
+    
+    @HasMany(()=>Plan)
+    planes!: Plan[];
+
+    @BelongsToMany(() => Trabajador, () => Trabaja)
+    estaciones!: Trabajador[];
+
 
 }
