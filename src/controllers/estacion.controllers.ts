@@ -74,7 +74,7 @@ export const agregarEstacion = async (req:Request, res: Response) =>{
 
             });
             res.status(200).json({
-                
+
             })
         }else{
             res.status(400).json({
@@ -89,6 +89,36 @@ export const agregarEstacion = async (req:Request, res: Response) =>{
             method: "GET",
             error: error
 
+        })
+    }
+
+}
+export const eliminarEstacion = async (req:Request, res: Response) =>{
+    try{
+        const {id_estacion} = req.params;
+        if(id_estacion){
+            const estacion = await Estacion.findByPk(id_estacion);
+            if(estacion){
+                estacion.destroy();
+                res.status(200).json({
+                    message:"Estacion eliminada  con exito",
+                    method: "DELETE"
+                })
+
+            }else{
+
+            }
+        }else{
+            res.status(400).json({
+                message: "El ID no puede estar vacio",
+                method:"DELETE"
+            })
+        }
+    }catch(error){
+        res.status(500).json({
+            message: "Error al eliminar la estacion",
+            method: "DELETE",
+            error:error
         })
     }
 
