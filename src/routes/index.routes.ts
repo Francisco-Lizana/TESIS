@@ -6,6 +6,7 @@ import estacion from './estacion.routes';
 import medicion from './mediciones.routes';
 import  auth from './auth.routes';
 import sensor from './sensor.routes';
+import actuador from './actuador.routes';
 import { postTest } from "../controllers/test.controller";
 
 const routes = Router();
@@ -16,6 +17,7 @@ routes.use("/api",estacion);
 routes.use("/api",medicion);
 routes.use("/api",auth);
 routes.use("/api",sensor);
+routes.use("/api",actuador);
 
 /*TEST PARA LA PRUEBA DE HARDWARE*/
 routes.post("/api/test", postTest);

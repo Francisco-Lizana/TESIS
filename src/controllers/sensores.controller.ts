@@ -30,7 +30,7 @@ export const agregarSensor = async (req:Request, res:Response) =>{
         }=req.body;
         if(descripcion && tipo && modelo && escala && id_estacion){
             const obj = await Sensor.create({descripcion ,tipo, modelo ,escala , configuracion, id_estacion})
-            res.status(200).json({
+            res.status(201).json({
                 message:"Se a agregado el sensor exitosamente",
                 method:"POST",
                 data:obj
