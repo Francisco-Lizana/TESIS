@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Estacion} from '../models/Estacion';
+import { Trabaja } from "../models/Trabaja";
 
 export const obtenerEstaciones =async (req:Request, res: Response) => {
     try {
@@ -119,6 +120,18 @@ export const eliminarEstacion = async (req:Request, res: Response) =>{
         res.status(500).json({
             message: "Error al eliminar la estacion",
             method: "DELETE",
+            error:error
+        })
+    }
+}
+
+export const obtenerAsignaciones = async (req:Request, res: Response) => {
+    try{
+        const estacion = await Estacion.findAll({include:[Trabaja]});
+    }catch(error){
+        res.status(500).json({
+            message: "Error al obtener las asignaciones de la estacion",
+            method: "GET",
             error:error
         })
     }

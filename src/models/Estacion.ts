@@ -44,7 +44,7 @@ export class Estacion extends Model {
     planes!: Plan[];
 
     @BelongsToMany(() => Trabajador, () => Trabaja)
-    estaciones!: Trabajador[];
+    trabajadores!: Trabajador[];
 
 
 }
