@@ -36,7 +36,7 @@ export class Actuador extends Model {
 
     @Column({
         type: DataType.JSON,
-        allowNull:false,
+        allowNull:true,
     })
     configuracion!:JSON;
 
