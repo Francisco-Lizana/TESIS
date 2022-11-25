@@ -32,14 +32,12 @@ export const agregarUsuario = async (req: Request, res: Response) =>{
             apellido_paterno,
             apellido_materno,
             correo,
-            id_rol
+            roles
         } = req.body;
 
         
         const t = await connection.transaction();
         if(rut && nombre && apellido_materno && apellido_paterno && correo){
-            const rol = await Rol.findByPk(id_rol);
-            console.log("ROL",rol)
             const user= await Usuario.create({
                 rut:rut,
                 nombre:nombre,
@@ -49,8 +47,7 @@ export const agregarUsuario = async (req: Request, res: Response) =>{
                 clave:"12345678"
             })
                        
-            await user.$add("roles", rol!);
-            let roles = await user.$get("roles");
+            await user.$add("roles", roles!);
             res.status(200).json({
                 method: "POST",
                 message: 'El usuario se creo con exito',
