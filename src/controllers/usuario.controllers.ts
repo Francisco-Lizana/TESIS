@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import { Rol } from "../models/Rol";
 import { Usuario} from '../models/Usuario';
 import { conection as connection } from '../config/db';
+import { RolUsuario } from "../models/RolUsuario";
+import { obtenerAsignaciones } from "./estacion.controllers";
 
 export const getUsuarios = async (req: Request, res: Response) => {
 
@@ -48,6 +50,7 @@ export const agregarUsuario = async (req: Request, res: Response) =>{
             })
                        
             await user.$add("roles", roles!);
+            let rul = await user.$get("roles");
             res.status(200).json({
                 method: "POST",
                 message: 'El usuario se creo con exito',
@@ -93,7 +96,11 @@ export const eliminarUsuario = async (req: Request, res: Response) =>{
         const {rut} = req.params;
         
         if(rut){
-            const obj = await Usuario.findByPk(rut);
+            await RolUsuario.destroy({
+                where:{usuario:rut}
+            })
+            let obj = await Usuario.findByPk(rut);
+
             if(obj){
                 obj.destroy();
                 res.status(200).json({
