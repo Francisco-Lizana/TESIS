@@ -133,3 +133,28 @@ export const eliminarUsuario = async (req: Request, res: Response) =>{
     }
 }
 
+export const obtenerUsuariosPorRol = async (req:Request, res:Response) => {
+    try{
+        const {id_rol} = req.params;
+        if(id_rol){
+            const lista = await Rol.findByPk(id_rol,{ include:[Usuario] })
+            res.status(200).json({
+                message:"Lista de usuarios por rol",
+                method:"GET",
+                data:lista
+            });
+        }else{
+            res.status(400).json({
+                message:"El parametro id_rol no puede estar vacio",
+                method:"GET"
+            })
+        }
+    }catch(error){
+        res.status(500).json({
+            message: "Error al obtener usuarios por rol",
+            method:"GET",
+            error:error
+        })
+    }
+}
+
