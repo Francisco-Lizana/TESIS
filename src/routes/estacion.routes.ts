@@ -4,9 +4,10 @@ import { obtenerEstaciones, agregarEstacion,obtenerAsignaciones,eliminarEstacion
 const router =  Router();
 
 router.get("/estacion/lista", obtenerEstaciones);
+router.get("/estacion/");
 router.post("/estacion", agregarEstacion);
 router.delete("/estacion/:id_estacion", eliminarEstacion);
 router.get("/estacion/:id");
-router.get("estacion/asignaciones", obtenerAsignaciones);
+router.get("estacion/config/:id_estacion", obtenerAsignaciones);
 export default router;
 
