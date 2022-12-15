@@ -8,6 +8,6 @@ router.get("/estacion/");
 router.post("/estacion", agregarEstacion);
 router.delete("/estacion/:id_estacion", eliminarEstacion);
 router.get("/estacion/:id");
-router.get("estacion/config/:id_estacion", obtenerConfiguracion);
+router.get("/estacion/config/:id_estacion", obtenerConfiguracion);
 export default router;
 
