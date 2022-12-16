@@ -134,13 +134,15 @@ export const obtenerConfiguracion = async (req: Request, res: Response) => {
         method:"GET",
         data: {
             sensor:[
-                {
-                    pin:1,
-                    tipo: "T",
+                  {
+                    id_sensor: 1,
+                    pin:3,
+                    tipo: "TH",
                     interval: 10000 
                 },
                 {
-                  pin:3,
+                  id_sensor: 2,
+                  pin:4,
                   tipo: "T",
                   interval: 1000 
               }
