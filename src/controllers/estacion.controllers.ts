@@ -141,10 +141,10 @@ export const obtenerConfiguracion = async (req: Request, res: Response) => {
                     interval: 10000 
                 },
                 {
-                  id_sensor: 2,
+                  id_sensor: 6,
                   pin:4,
-                  tipo: "T",
-                  interval: 1000 
+                  tipo: "LDR",
+                  interval: 2000 
               }
             ]
         }     
