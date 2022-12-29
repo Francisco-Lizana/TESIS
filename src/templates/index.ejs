@@ -1,0 +1,39 @@
+<style>
+    h1{
+        text-align: center;
+    }
+</style>
+<div>
+    <h1>Hello Wolld</h1>
+    <% for(var i= 0;i<students.length;i++) { %>
+        <p> <%= students[i].name %></p>
+    <% } %>
+    <canvas id="myChart"></canvas>
+</div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <script>
+    const ctx = document.getElementById('myChart');
+    let  p = new Object()
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+  </script>
+   
