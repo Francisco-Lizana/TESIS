@@ -8,7 +8,7 @@ import  auth from './auth.routes';
 import sensor from './sensor.routes';
 import actuador from './actuador.routes';
 import { postTest } from "../controllers/test.controller";
-import { reporte } from "../controllers/reporte.controller";
+import { reporte,reporteExcelEstacion } from "../controllers/reporte.controller";
 
 const routes = Router();
 
@@ -22,5 +22,6 @@ routes.use("/api",actuador);
 
 /*TEST PARA LA PRUEBA DE HARDWARE*/
 routes.post("/api/test", postTest);
-routes.post("/api/reporte", reporte);
+routes.get("/api/reporte", reporte);
+routes.get("/api/excelMediciones", reporteExcelEstacion);
 export default routes;

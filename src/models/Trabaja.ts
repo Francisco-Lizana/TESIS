@@ -1,5 +1,6 @@
 import {Table,Model,Column,DataType, HasMany, ForeignKey, BelongsTo} from 'sequelize-typescript';
 import { Estacion } from './Estacion';
+import { Rol } from './Rol';
 import { Trabajador } from './Trabajador';
 
 
@@ -10,13 +11,6 @@ import { Trabajador } from './Trabajador';
 
 export class Trabaja extends Model{
 
-    @Column({
-        type: DataType.INTEGER,
-        primaryKey:true,
-        allowNull:false,
-        autoIncrement:true
-    })
-    id_trabaja!:number;
 
     @ForeignKey(() => Estacion)
     @Column({
@@ -30,7 +24,11 @@ export class Trabaja extends Model{
     })
     id_trabajador!: number;
 
-    
+    @ForeignKey(() => Rol)
+    @Column({
+        allowNull: false
+    })
+    id_rol!: number;
 
 
 }

@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { Estacion } from "../models/Estacion";
 import { Trabaja } from "../models/Trabaja";
+import { Trabajador } from "../models/Trabajador";
 
 export const obtenerEstaciones = async (req: Request, res: Response) => {
   try {
@@ -130,30 +131,52 @@ export const obtenerConfiguracion = async (req: Request, res: Response) => {
   try {
     const { id_estacion } = req.params;
     res.status(200).json({
-        message:"Obteniendo la configuracion",
-        method:"GET",
-        data: {
-            sensor:[
-                  {
-                    id_sensor: 1,
-                    pin:3,
-                    tipo: "TH",
-                    interval: 10000 
-                },
-                {
-                  id_sensor: 17,
-                  pin:4,
-                  tipo: "LDR",
-                  interval: 2000 
-              }
-            ]
-        }     
-    })
+      message: "Obteniendo la configuracion",
+      method: "GET",
+      data: {
+        sensor: [
+          {
+            id_sensor: 1,
+            pin: 3,
+            tipo: "TH",
+            interval: 10000,
+          },
+          {
+            id_sensor: 17,
+            pin: 4,
+            tipo: "LDR",
+            interval: 2000,
+          },
+        ],
+      },
+    });
   } catch (error) {
     res.status(500).json({
-      messge: "Error al obtener la configuracion de la estación",
+      message: "Error al obtener la configuracion de la estación",
       method: "GET",
       error: error,
+    });
+  }
+};
+
+export const obtenerTrabajadoresAsignados = async (req:Request,res: Response) => {
+  try {
+    const {id_estacion} = req.params;
+    if(id_estacion){
+      let matenedores = await Estacion.findByPk(id_estacion,{
+        include:[Trabajador]
+      })
+    }else {
+      res.status(400).json({
+        message:"El parametro no puede estar vacio",
+        method: 'GET'
+      })
+    }
+  } catch (error) {
+    res.status(500).json({
+      message:"Error al obtener los trabajadores asignados a la estación",
+      method: 'GET',
+      error: error
     });
   }
 };

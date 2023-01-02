@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { Rol } from "../models/Rol";
 import { Usuario} from '../models/Usuario';
-import { conection as connection } from '../config/db';
+import { conection } from '../config/db';
 import { RolUsuario } from "../models/RolUsuario";
 import { obtenerAsignaciones } from "./estacion.controllers";
 
@@ -38,7 +38,7 @@ export const agregarUsuario = async (req: Request, res: Response) =>{
         } = req.body;
 
         
-        const t = await connection.transaction();
+        const t = await  conection.transaction();
         if(rut && nombre && apellido_materno && apellido_paterno && correo){
             const user= await Usuario.create({
                 rut:rut,
