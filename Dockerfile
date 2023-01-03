@@ -3,5 +3,5 @@ RUN mkdir /app
 COPY  ./ /app
 WORKDIR /app
 RUN npm install --force
-RUN npm run dev
+CMD ["npm","run", "dev"]
 EXPOSE 3000
