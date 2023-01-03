@@ -37,7 +37,7 @@
     "@types/jest": "^29.2.3",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/morgan": "^1.9.3",
-    "@types/node": "^18.6.2",
+    "@types/node": "^18.11.18",
     "@types/nodemailer": "^6.4.4",
     "@types/supertest": "^2.0.12",
     "class-validator": "^0.13.2",
