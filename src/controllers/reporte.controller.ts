@@ -10,11 +10,13 @@ let path = require("path");
 const fs = require("fs");
 var xl = require("excel4node");
 
-export const reporte = async (req: Request, res: Response) => {
+export const reporteGeneralPDF = async (req: Request, res: Response) => {
   try {
-    let inicio: string = "2022-12-07T00:00:00.000Z";
-    let termino: string = "2022-12-14T23:59:00.000Z";
-    let id_estacion = 7;
+/*     let inicio: string = "2022-12-07T00:00:00.000Z";
+    let termino: string = "2022-12-14T23:59:00.000Z"; */
+    
+    const {inicio, termino,id_estacion}=req.body;
+    //let id_estacion = 7;
     diferenciaDate(inicio, termino);
 
     let footer: string = "";
@@ -125,9 +127,8 @@ export const reporte = async (req: Request, res: Response) => {
 
 export const reporteExcelEstacion = async (req: Request, res: Response) => {
   try {
-    let inicio: string = "2022-12-07T00:00:00.000Z";
-    let termino: string = "2022-12-14T23:59:00.000Z";
-    let id_estacion = 7;
+    const {inicio, termino,id_estacion}=req.body;
+    /* let id_estacion = 7; */
 
     let sensores = await Medicion.findAll({
       where: {

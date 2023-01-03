@@ -7,8 +7,8 @@ on:
     branches: [ "main" ]
 env: 
   PORT : 22
-  HOST: 44.212.72.194
-  USER: ubuntu
+  HOST: pacheco.chillan.ubiobio.cl
+  USER: franciscolizana1801
 jobs:
   build:
 
@@ -34,15 +34,5 @@ jobs:
           source: "*"
           target: "backend"
 
-    - name: SSH Command
-      uses: D3rHase/ssh-command-action@v0.2.1
-      with:
-       HOST: ${{env.HOST}}
-       USER: ${{env.USER}}
-       PRIVATE_SSH_KEY: ${{ secrets.PASSWORD }}
-       COMMAND:  cd backend; 
-                 pm2 stop run;
-                 pm2 del run;
-                 pm2 start run.sh
     
 

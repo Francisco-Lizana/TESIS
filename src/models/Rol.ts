@@ -1,5 +1,7 @@
 import {Table,Model,Column,DataType, HasMany, ForeignKey, BelongsToMany} from 'sequelize-typescript';
 import { RolUsuario } from './RolUsuario';
+import { Trabaja } from './Trabaja';
+import { Trabajador } from './Trabajador';
 import { Usuario } from './Usuario';
 
 @Table({
@@ -25,4 +27,6 @@ export class Rol extends Model {
 
     @BelongsToMany(() => Usuario, () => RolUsuario)
     usuarios!: Usuario[];
+
+
 }

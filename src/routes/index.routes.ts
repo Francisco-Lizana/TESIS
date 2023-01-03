@@ -7,8 +7,9 @@ import medicion from './mediciones.routes';
 import  auth from './auth.routes';
 import sensor from './sensor.routes';
 import actuador from './actuador.routes';
+import reporte from './reporte.routes';
+import trabajador from './trabajador.routes';
 import { postTest } from "../controllers/test.controller";
-import { reporte,reporteExcelEstacion } from "../controllers/reporte.controller";
 
 const routes = Router();
 
@@ -19,9 +20,10 @@ routes.use("/api",medicion);
 routes.use("/api",auth);
 routes.use("/api",sensor);
 routes.use("/api",actuador);
+routes.use("/api",reporte)
+routes.use("/api",trabajador)
 
 /*TEST PARA LA PRUEBA DE HARDWARE*/
 routes.post("/api/test", postTest);
-routes.get("/api/reporte", reporte);
-routes.get("/api/excelMediciones", reporteExcelEstacion);
+
 export default routes;

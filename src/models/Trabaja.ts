@@ -24,11 +24,6 @@ export class Trabaja extends Model{
     })
     id_trabajador!: number;
 
-    @ForeignKey(() => Rol)
-    @Column({
-        allowNull: false
-    })
-    id_rol!: number;
 
 
 }

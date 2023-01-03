@@ -1,11 +1,14 @@
 import { Request, Response } from "express";
 import { Estacion } from "../models/Estacion";
+import { Sensor } from "../models/Sensor";
 import { Trabaja } from "../models/Trabaja";
-import { Trabajador } from "../models/Trabajador";
+
 
 export const obtenerEstaciones = async (req: Request, res: Response) => {
   try {
-    const list = await Estacion.findAll();
+    const list = await Estacion.findAll({
+      include:[Sensor]
+    });
 
     if (list.length) {
       res.status(200).json({
@@ -159,24 +162,3 @@ export const obtenerConfiguracion = async (req: Request, res: Response) => {
   }
 };
 
-export const obtenerTrabajadoresAsignados = async (req:Request,res: Response) => {
-  try {
-    const {id_estacion} = req.params;
-    if(id_estacion){
-      let matenedores = await Estacion.findByPk(id_estacion,{
-        include:[Trabajador]
-      })
-    }else {
-      res.status(400).json({
-        message:"El parametro no puede estar vacio",
-        method: 'GET'
-      })
-    }
-  } catch (error) {
-    res.status(500).json({
-      message:"Error al obtener los trabajadores asignados a la estación",
-      method: 'GET',
-      error: error
-    });
-  }
-};

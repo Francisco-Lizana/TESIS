@@ -18,6 +18,47 @@ export const Obtenersensores = async (req: Request, res: Response) => {
         })
     }
 }
+export const actualizarSensor = async (req: Request, res: Response) => {
+    try {
+        const {id_sensor} = req.params;
+        const {modelo, descripcion, escala, tipo} = req.body;
+        const sensor:any = await Sensor.findByPk(id_sensor);
+        sensor.modelo = modelo;
+        sensor.escala = escala;
+        sensor.descripcion = descripcion;
+        sensor.tipo = tipo;
+        sensor?.save()
+        res.status(200).json({
+            message:'Listado de Sensores',
+            method: "GET",
+            data: sensor
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: "Se genero un error al obtener la lista de Sensores",
+            method: "GET",
+            error:error
+        })
+    }
+}
+export const obtenerSensor = async (req: Request, res: Response) => {
+    try {
+        const {id_sensor} = req.params;
+        let sensor= await Sensor.findByPk(id_sensor);
+
+        res.status(200).json({
+            message:'Exito al obtener el sensor',
+            method: "GET",
+            data: sensor
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: "Se genero un error al obtener el sensor",
+            method: "GET",
+            error:error
+        })
+    }
+}
 export const agregarSensor = async (req:Request, res:Response) =>{
     try{
         const {

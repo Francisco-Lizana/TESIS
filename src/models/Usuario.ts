@@ -1,7 +1,8 @@
-import {Table,Model,Column,DataType, BelongsToMany,ForeignKey} from 'sequelize-typescript';
+import {Table,Model,Column,DataType, BelongsToMany,ForeignKey, HasOne} from 'sequelize-typescript';
 import { Rol } from './Rol';
 import { RolUsuario } from './RolUsuario';
 import * as bcrypt from "bcrypt";
+import { Trabajador } from './Trabajador';
 
 
 @Table({
@@ -51,6 +52,9 @@ export class Usuario extends Model {
         }
     })
     clave!:string;
+    
+    @HasOne(()=>Trabajador)
+    trabajador!: Trabajador
 
     @BelongsToMany(() => Rol, () => RolUsuario)
     roles!: Rol[];
