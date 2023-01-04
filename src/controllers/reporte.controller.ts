@@ -26,7 +26,6 @@ export const reporteGeneralPDF = async (req: Request, res: Response) => {
       {},
       (err: any, data: any) => {
         if (err) {
-          console.log("ERROR::GET-TEMPLATE::footer.ejs");
         } else {
           footer = data;
         }
@@ -37,7 +36,6 @@ export const reporteGeneralPDF = async (req: Request, res: Response) => {
       {},
       (err: any, data: any) => {
         if (err) {
-          console.log("ERROR::GET-TEMPLATE::header.ejs");
         } else {
           header = data;
         }
@@ -59,6 +57,7 @@ export const reporteGeneralPDF = async (req: Request, res: Response) => {
     let estacion = await Estacion.findByPk(id_estacion, {
       include: [Sensor, Actuador],
     });
+    
     let promedios: any = await Medicion.findAll({
       where: {
         fecha: {
@@ -70,9 +69,11 @@ export const reporteGeneralPDF = async (req: Request, res: Response) => {
           [Sequelize.fn("avg", Sequelize.col("valor")), "promedio"],
           [Sequelize.fn("min", Sequelize.col("valor")), "minimo"],
           [Sequelize.fn("max", Sequelize.col("valor")), "maximo"],
+          "id_sensor"
         ],
+        exclude:["id_medicion", "valor", "fecha", "id_estacion"]
       },
-      include: [Sensor],
+      include:[Sensor],
       group: "id_sensor",
     });
 
@@ -89,9 +90,10 @@ export const reporteGeneralPDF = async (req: Request, res: Response) => {
         var a: any = { fecha: item.fecha, valor: item.valor };
         medicionesRender.push(a);
       });
-
+     
       sensores.push({ sensor: iterator.sensor, mediciones: medicionesRender });
     }
+   
 
     let datosRender = {
       promedios: parseObject(promedios),
@@ -129,17 +131,6 @@ export const reporteExcelEstacion = async (req: Request, res: Response) => {
   try {
     const {inicio, termino,id_estacion}=req.body;
     /* let id_estacion = 7; */
-
-    let sensores = await Medicion.findAll({
-      where: {
-        fecha: {
-          [Op.between]: [inicio, termino],
-        },
-        id_estacion: id_estacion,
-      },
-      include: [Sensor],
-      group: "id_sensor",
-    });
 
     let md = await Medicion.findAll({
       where: {
