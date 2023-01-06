@@ -10,6 +10,7 @@ import { Trabajador } from '../models/Trabajador';
 import { Actuador } from '../models/Actuador';
 import { Trabaja } from '../models/Trabaja';
 import { Plan } from '../models/Plan';
+import { Notificacion } from '../models/Notificacion';
 
 dotenv.config();
 
@@ -19,7 +20,7 @@ export const conection = new Sequelize({
     database: process.env.DB_DATABASE,
     dialect: 'mysql',
     password: process.env.DB_PASSWORD,
-    port: 3015,
+    //port: 3015,
     models:[
       Rol,
       Usuario,
@@ -30,7 +31,8 @@ export const conection = new Sequelize({
       Medicion,
       Actuador,
       Plan,
-      Trabaja
+      Trabaja,
+      Notificacion
     ],
     logging:true
   });

@@ -10,6 +10,7 @@ function main(){
         console.log("error en la conexion ", error)
     })
     
+    
     app.listen(3000,()=>{
         console.log('servidor sequelize inicializado en el puerto '+3000)
     })

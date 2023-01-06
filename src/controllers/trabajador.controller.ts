@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
+import { Rol } from "../models/Rol";
 import { Trabaja } from "../models/Trabaja";
 import { Trabajador } from "../models/Trabajador";
+import { Usuario } from "../models/Usuario";
 import { MANTENEDOR, USUARIO_PLANTA } from "../utils/const/const";
 
 export const obtenerTrabajadoresAsignados = async (
@@ -71,6 +73,31 @@ export const asignarTrabajador = async (req: Request, res: Response) => {
     res.status(500).json({
       message: "Error al asignar trabjador a la estación de monitoreo",
       method: "POST",
+      error: error,
+    });
+  }
+};
+
+export const obtenerTrabajadores = async (req: Request, res: Response) => {
+  try {
+    const usuarios = await Usuario.findAll({
+      include: [{
+        model:Rol,
+        where:{
+          id_rol: [MANTENEDOR, USUARIO_PLANTA]
+        }
+      }, Trabajador] 
+      });
+
+    res.status(200).json({
+      message: "Listado de Usuarios por rol",
+      method: "GET",
+      data: usuarios,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Se genero un error al obtener la lista de usuarios por rol",
+      method: "GET",
       error: error,
     });
   }

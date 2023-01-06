@@ -6,8 +6,11 @@ import {
   BelongsTo,
   ForeignKey,
   BelongsToMany,
+  HasMany,
 } from "sequelize-typescript";
 import { Estacion } from "./Estacion";
+import { Notificacion } from "./Notificacion";
+import { Rol } from "./Rol";
 import { Trabaja } from "./Trabaja";
 import { Usuario } from "./Usuario";
 
@@ -37,6 +40,14 @@ export class Trabajador extends Model {
   @BelongsTo( () => Usuario)
   usuario!: Usuario;
 
+  @HasMany(()=>Notificacion)
+  notificaciones!: Notificacion[];
+
+  
   @BelongsToMany(() => Estacion, () => Trabaja)
   estaciones!: Estacion[];
+
+  @BelongsToMany(() => Rol, () => Trabaja)
+  roles!: Rol[];
+
 }

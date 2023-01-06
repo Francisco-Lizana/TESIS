@@ -16,13 +16,19 @@ export class Trabaja extends Model{
     @Column({
         allowNull: false
     })
-    id_estacion!: string;
+    id_estacion!: number;
 
     @ForeignKey(() => Trabajador)
     @Column({
         allowNull: false
     })
     id_trabajador!: number;
+
+    @ForeignKey(() => Rol)
+    @Column({
+        allowNull: false
+    })
+    id_rol!: number;
 
 
 

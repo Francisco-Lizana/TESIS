@@ -4,7 +4,7 @@ import { Usuario } from "../models/Usuario";
 import { conection } from "../config/db";
 import { RolUsuario } from "../models/RolUsuario";
 import { Trabajador } from "../models/Trabajador";
-import { ACTIVO } from "../utils/const/const";
+import { ACTIVO, MANTENEDOR, USUARIO_PLANTA } from "../utils/const/const";
 
 export const getUsuarios = async (req: Request, res: Response) => {
   try {
@@ -23,6 +23,7 @@ export const getUsuarios = async (req: Request, res: Response) => {
     });
   }
 };
+
 export const agregarUsuario = async (req: Request, res: Response) => {
   try {
     console.log(req.body);
@@ -150,18 +151,20 @@ export const actualizar = async (req: Request, res: Response) => {
     const { nombre, apellido_materno, apellido_paterno, clave, rut, correo } =
       req.body;
     console.log("BODY::", req.body);
-    const usuario:any = await Usuario.findByPk(rut);
-    if(rut!='') usuario.rut= rut;
-    if(nombre!='')usuario.nombre = nombre;
-    if(apellido_materno!='')usuario.apellido_materno = apellido_materno;
-    if(apellido_paterno!='')usuario.apellido_paterno=apellido_paterno;
-    if(clave!='')usuario.clave= clave;
-    if(correo!='')usuario.correo = correo;
+    const usuario: any = await Usuario.findByPk(rut);
+    if (rut != "") usuario.rut = rut;
+    if (nombre != "") usuario.nombre = nombre;
+    if (apellido_materno != "") usuario.apellido_materno = apellido_materno;
+    if (apellido_paterno != "") usuario.apellido_paterno = apellido_paterno;
+    if (clave != "") usuario.clave = clave;
+    if (correo != "") usuario.correo = correo;
+
     usuario.save();
-    
+
     res.status(200).json({
       message: "Listo",
     });
+    
   } catch (error) {
     res.status(500).json({
       message: "Los datos del usuario no se han podido actualizar",

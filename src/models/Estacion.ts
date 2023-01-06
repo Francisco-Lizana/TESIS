@@ -2,6 +2,7 @@ import {Table,Model,Column,DataType, HasMany, ForeignKey, BelongsTo, BelongsToMa
 import { Actuador } from './Actuador';
 import { Medicion } from './Medicion';
 import { Plan } from './Plan';
+import { Rol } from './Rol';
 import { Sensor } from './Sensor';
 import { Trabaja } from './Trabaja';
 import { Trabajador } from './Trabajador';
@@ -45,6 +46,9 @@ export class Estacion extends Model {
 
     @BelongsToMany(() => Trabajador, () => Trabaja)
     trabajadores!: Trabajador[];
+
+    @BelongsToMany(() => Rol, () => Trabaja)
+    roles!: Rol[];
 
 
 }

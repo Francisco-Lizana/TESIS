@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { asignarTrabajador, obtenerTrabajadoresAsignados } from "../controllers/trabajador.controller";
+import { asignarTrabajador, obtenerTrabajadores, obtenerTrabajadoresAsignados } from "../controllers/trabajador.controller";
 const router =  Router();
 
-router.get('/trabaja/lista/:id_estacion', obtenerTrabajadoresAsignados);
-router.post('/trabaja/asignar', asignarTrabajador);
+router.get('/trabajador/lista/:id_estacion', obtenerTrabajadoresAsignados);
+router.get('/trabajador', obtenerTrabajadores);
+router.post('/trabajador/asignar', asignarTrabajador);
 
 export default router;
