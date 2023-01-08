@@ -28,6 +28,7 @@ export const login = async (req: Request, res: Response) => {
                 apellido_paterno: usuario!.apellido_paterno,
                 apellido_materno: usuario!.apellido_materno,
                 rut: usuario!.rut,
+                trabajador: await usuario!.$get('trabajador'),
                 
             },
             config.jwtSecret,

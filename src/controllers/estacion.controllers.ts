@@ -1,13 +1,15 @@
 import { Request, Response } from "express";
 import { Estacion } from "../models/Estacion";
+import { Rol } from "../models/Rol";
 import { Sensor } from "../models/Sensor";
 import { Trabaja } from "../models/Trabaja";
-
+import { Trabajador } from "../models/Trabajador";
+import { Usuario } from "../models/Usuario";
 
 export const obtenerEstaciones = async (req: Request, res: Response) => {
   try {
     const list = await Estacion.findAll({
-      include:[Sensor]
+      include: [Sensor],
     });
 
     if (list.length) {
@@ -119,17 +121,46 @@ export const eliminarEstacion = async (req: Request, res: Response) => {
   }
 };
 
-export const obtenerAsignaciones = async (req: Request, res: Response) => {
+export const obtenerEstacionesAsignadas = async (
+  req: Request,
+  res: Response
+) => {
   try {
-    const estacion = await Estacion.findAll({ include: [Trabaja] });
+    const { id_trabajador, id_rol } = req.body;
+    let trabaja_es = await Trabaja.findAll({
+      where: {
+        id_trabajador: id_trabajador,
+        id_rol: id_rol,
+      },
+    });
+    console.log("TRABAJA::", trabaja_es)
+    let estaciones = [];
+    for (let a of trabaja_es) {
+      const id = a.id_estacion;
+      estaciones.push(
+        await Estacion.findOne({
+          where: {
+            id_estacion: id,
+          },
+          include:[Sensor]
+        })
+      );
+    }
+
+    res.status(200).json({
+      message: "Obtener estaciones dle usuario",
+      methof: "GET",
+      data: estaciones,
+    });
   } catch (error) {
     res.status(500).json({
-      message: "Error al obtener las asignaciones de la estacion",
+      message: "Error al obtener estaciones del usuario",
       method: "GET",
       error: error,
     });
   }
 };
+
 export const obtenerConfiguracion = async (req: Request, res: Response) => {
   try {
     const { id_estacion } = req.params;

@@ -14,7 +14,7 @@ router.get('/usuario/:rut',getUsuarioPorRut);
 router.post('/usuario',agregarUsuario);
 router.delete('/usuario/:rut',eliminarUsuario);
 router.get('/usuario/trabajador/:id_rol' ,obtenerUsuariosPorRol);
-router.post('/usuario/actualizar/' ,actualizar);
+router.post('/usuario/actualizar/:id_rol' ,actualizar);
 
 
 export default router;
