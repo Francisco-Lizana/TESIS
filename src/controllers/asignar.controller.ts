@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { Op } from "sequelize/types";
 import { Estacion } from "../models/Estacion";
+import { Plan } from "../models/Plan";
 import { Rol } from "../models/Rol";
 import { Trabaja } from "../models/Trabaja";
 import { Trabajador } from "../models/Trabajador";
@@ -46,7 +47,6 @@ export const obtenerAsignacionTrabajadores = async (
 ) => {
   try {
     const { id_estacion } = req.params;
-
     let usuario_planta = await Trabajador.findAll({
       include: [
         {
@@ -66,9 +66,10 @@ export const obtenerAsignacionTrabajadores = async (
           where: {
             id_rol: USUARIO_PLANTA,
           },
-        },
+        }
       ],
     });
+    console.log("usuariosplanta", usuario_planta)
     let mantenedores = await Trabajador.findAll({
       include: [
         {

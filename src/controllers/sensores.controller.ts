@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
 import { Estacion } from "../models/Estacion";
 import { Sensor } from "../models/Sensor";
+import { Trabajador } from "../models/Trabajador";
 
 export const Obtenersensores = async (req: Request, res: Response) => {
     try {
-        const sensores = await Estacion.findAll({include:[Sensor]});
+        const sensores = await Estacion.findAll({include:[Sensor,Trabajador]});
         res.status(200).json({
             message:'Listado de Sensores',
             method: "GET",
@@ -18,6 +19,8 @@ export const Obtenersensores = async (req: Request, res: Response) => {
         })
     }
 }
+
+
 export const actualizarSensor = async (req: Request, res: Response) => {
     try {
         const {id_sensor} = req.params;
@@ -112,6 +115,28 @@ export const eliminarSensor = async (req:Request, res:Response) =>{
         res.status(500).json({
             message:"Error al eliminar el sensor",
             method: "DELETE",
+            error:error
+        })
+    }
+
+}
+export const configSensor = async (req:Request, res:Response) =>{
+    try {
+        const {id_sensor} = req.params;
+        let body = req.body;
+        let sensor:any = await Sensor.findByPk(id_sensor);
+        sensor.configuracion = body;
+        sensor?.save()
+        
+        res.status(200).json({
+            message:'Listado de Sensores',
+            method: "POST"
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            message:"Error al CONFIGURAR  el sensor",
+            method: "POST",
             error:error
         })
     }

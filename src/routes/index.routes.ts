@@ -10,6 +10,7 @@ import actuador from './actuador.routes';
 import reporte from './reporte.routes';
 import trabajador from './trabajador.routes';
 import asignar from './asignar.routes';
+import plan from './plan.routes';
 import { postTest } from "../controllers/test.controller";
 
 const routes = Router();
@@ -24,6 +25,7 @@ routes.use("/api",actuador);
 routes.use("/api",reporte)
 routes.use("/api",trabajador)
 routes.use("/api",asignar)
+routes.use("/api",plan)
 
 /*TEST PARA LA PRUEBA DE HARDWARE*/
 routes.post("/api/test", postTest);

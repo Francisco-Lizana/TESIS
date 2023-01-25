@@ -7,8 +7,8 @@ on:
     branches: [ "main" ]
 env: 
   PORT : 22
-  HOST: pacheco.chillan.ubiobio.cl
-  USER: franciscolizana1801
+  HOST: ec2-44-212-72-194.compute-1.amazonaws.com
+  USER: ubuntu
 jobs:
   build:
 

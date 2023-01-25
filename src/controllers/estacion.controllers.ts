@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
+import { Actuador } from "../models/Actuador";
 import { Estacion } from "../models/Estacion";
+import { Plan } from "../models/Plan";
 import { Rol } from "../models/Rol";
 import { Sensor } from "../models/Sensor";
 import { Trabaja } from "../models/Trabaja";
@@ -9,7 +11,7 @@ import { Usuario } from "../models/Usuario";
 export const obtenerEstaciones = async (req: Request, res: Response) => {
   try {
     const list = await Estacion.findAll({
-      include: [Sensor],
+      include: [Sensor, Actuador, Plan],
     });
 
     if (list.length) {
@@ -192,4 +194,25 @@ export const obtenerConfiguracion = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const obtenerEstacionPorID =async (req: Request, res: Response) => {
+  try {
+      const {id_estacion} = req.params;
+
+      let estacion = await Estacion.findByPk(id_estacion,{
+        include:[Sensor, Actuador]
+      });
+      res.status(200).json({
+        data:estacion
+      });
+
+
+  } catch (error) {
+    res.status(500).json({
+      message: "Error al obtener la  estación por id",
+      method: "GET",
+      error: error,
+    });
+  }
+}
 

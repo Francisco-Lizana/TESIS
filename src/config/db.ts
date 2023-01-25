@@ -20,7 +20,7 @@ export const conection = new Sequelize({
     database: process.env.DB_DATABASE,
     dialect: 'mysql',
     password: process.env.DB_PASSWORD,
-    //port: 3015,
+    port: 3306,
     models:[
       Rol,
       Usuario,

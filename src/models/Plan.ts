@@ -30,11 +30,11 @@ export class Plan extends Model {
 
   /* Clavez Foraneas*/
 
-  @ForeignKey(() => Estacion)
-  id_estacion!: number;
+  @ForeignKey(()=>Estacion)
+  id_estacion!:number;
 
   /*Relaciones*/
 
-  @BelongsTo(() => Estacion)
-  estacion!: Estacion;
+  @BelongsTo(()=>Estacion)
+  estacion!:Estacion;
 }

@@ -148,7 +148,7 @@ export const obtenerUsuariosPorRol = async (req: Request, res: Response) => {
 export const actualizar = async (req: Request, res: Response) => {
   try {
     const { id_rol } = req.params;
-    const { nombre, apellido_materno, apellido_paterno, clave, rut, correo } =
+    const { nombre, apellido_materno, apellido_paterno, clave, rut, correo,roles } =
       req.body;
     console.log("BODY::", req.body);
 
@@ -161,6 +161,9 @@ export const actualizar = async (req: Request, res: Response) => {
     if(clave != '' && parseInt(id_rol) != ADMINISTRADOR){
       console.log("actualizacion de clave")
       usuario.clave = clave;
+    }
+    if(roles){
+      await usuario.$set("roles", roles);
     }
 
     console.log("USUARIO::", usuario);
